@@ -116,4 +116,17 @@ class UserController extends ApiController
 
         return $this->showOne($user);
     }
+
+    public function verify($token){
+
+        $user = User::where('verification_token',$token)->firstOrFail();
+
+        $user->verified = USER::USUARIO_VERIFICADO;
+        $user->verification_token = null;
+
+        $user->save();
+
+        return $this->showMessage('El usuario fue verificado correctamente');
+
+    }
 }
