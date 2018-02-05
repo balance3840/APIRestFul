@@ -31,6 +31,6 @@ class UserMailChanged extends Mailable
      */
     public function build()
     {
-        return $this->text('emails.confirm')->subject('Por favor confirma tu nuevo correo electrónico')->from('postmaster@mg.apunterd.com', 'APIRestFul');
+        return $this->markdown('emails.confirm')->subject('Por favor confirma tu nuevo correo electrónico')->from('postmaster@mg.apunterd.com', 'APIRestFul');
     }
 }
