@@ -5,6 +5,7 @@ namespace App;
 use App\Seller;
 use App\Category;
 use App\Transaction;
+use App\Transformers\ProductTransformer;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,8 @@ class Product extends Model
     	'image',
     	'seller_id'
     ];
+
+    public $transformer = ProductTansformer::class;
 
     protected $hidden = [
       'pivot'

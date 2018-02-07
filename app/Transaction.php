@@ -4,6 +4,7 @@ namespace App;
 
 use App\Buyer;
 use App\Product;
+use App\Transformers\TransactionTransformer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,6 +17,8 @@ class Transaction extends Model
     	'buyer_id',
     	'product_id'
     ];
+
+    public $transformer = TransactionTansformer::class;
 
     protected $dates = ['deleted_at'];
 
