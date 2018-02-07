@@ -9,7 +9,7 @@ use App\Transformers\BuyerTransformer;
 class Buyer extends User
 {
 
-	public $transformer = BuyerTansformer::class;
+	public $transformer = BuyerTransformer::class;
 
 	protected static function boot()
 	{

@@ -18,7 +18,7 @@ class Transaction extends Model
     	'product_id'
     ];
 
-    public $transformer = TransactionTansformer::class;
+    public $transformer = TransactionTransformer::class;
 
     protected $dates = ['deleted_at'];
 

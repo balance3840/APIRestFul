@@ -11,7 +11,7 @@ class Category extends Model
 {
 	use SoftDeletes;
 
-    public $transformer = CategoryTansformer::class;
+    public $transformer = CategoryTransformer::class;
 
     protected $fillable = [
     	'name',

@@ -25,7 +25,7 @@ class Product extends Model
     	'seller_id'
     ];
 
-    public $transformer = ProductTansformer::class;
+    public $transformer = ProductTransformer::class;
 
     protected $hidden = [
       'pivot'

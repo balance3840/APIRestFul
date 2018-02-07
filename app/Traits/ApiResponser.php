@@ -22,17 +22,19 @@ trait ApiResponser
 	{
 
 		if ($collection->isEmpty()) {
-			return $this->successReponse($collection);
+			return $this->successReponse(['data' => $collection], $code);
 		}
 
 	   $transformer = $collection->first()->transformer;
 	   $collection = $this->transformData($collection, $transformer);
-       return $this->successReponse(['data' => $collection], $code);
+       return $this->successReponse($collection, $code);
 	}
 
 	protected function showOne(Model $instance, $code = 200)
 	{
-       return $this->successReponse(['data' => $instance], $code);
+	   $transformer = $instance->transformer;	
+	   $collection = $this->transformData($instance, $transformer);
+       return $this->successReponse($collection, $code);
 	}
 
 	protected function showMessage($message, $code = 200)
