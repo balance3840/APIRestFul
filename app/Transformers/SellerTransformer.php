@@ -23,4 +23,18 @@ class SellerTransformer extends TransformerAbstract
             'fechaEliminación' => isset($seller->deleted_at) ? (string)$seller->deleted_at : null,
         ];
     }
+
+    public static function originalAttribute($index)
+    {
+        $attributes = [
+            'identificador' => 'id',
+            'nombre' => 'name',
+            'correo' => 'email',         
+            'fechaCreacion' => 'created_at',
+            'fechaActualización' => 'updated_at',
+            'fechaEliminación' => 'deleted_at',
+        ];
+
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
 }
