@@ -21,7 +21,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    public $transformer = UserTansformer::class;
+    public $transformer = UserTransformer::class;
 
     /**
      * The attributes that are mass assignable.

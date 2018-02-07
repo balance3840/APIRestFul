@@ -20,6 +20,13 @@ trait ApiResponser
 
 	protected function showAll(Collection $collection, $code = 200)
 	{
+
+		if ($collection->isEmpty()) {
+			return $this->successReponse($collection);
+		}
+
+	   $transformer = $collection->first()->transformer;
+	   $collection = $this->transformData($collection, $transformer);
        return $this->successReponse(['data' => $collection], $code);
 	}
 
@@ -31,5 +38,13 @@ trait ApiResponser
 	protected function showMessage($message, $code = 200)
 	{
        return $this->successReponse(['data' => $message], $code);
+	}
+
+	protected function transformData($data, $transformer)
+	{
+		$transformation = fractal($data, new $transformer);
+
+		return $transformation->toArray();
+
 	}
 }

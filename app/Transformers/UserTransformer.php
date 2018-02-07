@@ -17,12 +17,12 @@ class UserTransformer extends TransformerAbstract
         return [
             'identificador' => (int)$user->id,
             'nombre' => (string)$user->name,
-            'correo' => (string)$user->correo,
+            'correo' => (string)$user->email,
             'esVerificado' => (int)$user->verified,
             'esAdministrador' => ($user->admin === 'true'),
             'fechaCreacion' => (string)$user->created_at,
             'fechaActualización' => (string)$user->updated_at,
-            'fechaEliminación' => isset($user->updated_at) ? (string)$user->deleted_at : null,
+            'fechaEliminación' => isset($user->deleted_at) ? (string)$user->deleted_at : null,
         ];
     }
 }

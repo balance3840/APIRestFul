@@ -20,7 +20,7 @@ class BuyerTransformer extends TransformerAbstract
             'correo' => (string)$buyer->correo,
             'fechaCreacion' => (string)$buyer->created_at,
             'fechaActualización' => (string)$buyer->updated_at,
-            'fechaEliminación' => isset($buyer->updated_at) ? (string)$buyer->deleted_at : null,
+            'fechaEliminación' => isset($buyer->deleted_at) ? (string)$buyer->deleted_at : null,
         ];
     }
 }

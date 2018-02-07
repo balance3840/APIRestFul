@@ -20,7 +20,7 @@ class CategoryTransformer extends TransformerAbstract
             'detalles' => (string)$category->description,
             'fechaCreacion' => (string)$category->created_at,
             'fechaActualización' => (string)$category->updated_at,
-            'fechaEliminación' => isset($category->updated_at) ? (string)$category->deleted_at : null,
+            'fechaEliminación' => isset($category->deleted_at) ? (string)$category->deleted_at : null,
         ];
     }
 }
