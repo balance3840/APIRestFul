@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 Use Illuminate\Support\Collection;
@@ -50,11 +51,21 @@ trait ApiResponser
 
 	protected function paginate(Collection $collection)
 	{
+		$rules = [
+			'per_page' => 'integer|min:2|max:50'
+		];
+
+		Validator::validate(request()->all(), $rules);
+
 		$page = LengthAwarePaginator::resolveCurrentPage();
 
 		$perPage = 15;
 
-		$results = $collection->slice(($page - 1) * $page, $perPage)->values();
+		if (request()->has('per_page')) {
+			$perPage = (int) request()->per_page;
+		}
+
+		$results = $collection->slice(($page - 1) * $perPage, $perPage)->values();
 
 		$paginated = new LengthAwarePaginator($results, $collection->count(), $perPage, $page,  [
 			'path' => LengthAwarePaginator::resolveCurrentPath(),
