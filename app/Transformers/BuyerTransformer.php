@@ -17,7 +17,7 @@ class BuyerTransformer extends TransformerAbstract
       return [
             'identificador' => (int)$buyer->id,
             'nombre' => (string)$buyer->name,
-            'correo' => (string)$buyer->correo,
+            'correo' => (string)$buyer->email,
             'fechaCreacion' => (string)$buyer->created_at,
             'fechaActualización' => (string)$buyer->updated_at,
             'fechaEliminación' => isset($buyer->deleted_at) ? (string)$buyer->deleted_at : null,
