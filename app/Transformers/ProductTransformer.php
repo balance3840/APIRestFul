@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Transformers;
-
 use App\Product;
 use League\Fractal\TransformerAbstract;
-
 class ProductTransformer extends TransformerAbstract
 {
     /**
@@ -14,17 +11,17 @@ class ProductTransformer extends TransformerAbstract
      */
     public function transform(Product $product)
     {
-            return [
+        return [
             'identificador' => (int)$product->id,
             'titulo' => (string)$product->name,
             'detalles' => (string)$product->description,
-            'disponibles' => (int)$product->quantity,
-            'estado' => (string)$product->status,            
+            'disponibles' => (string)$product->quantity,
+            'estado' => (string)$product->status,
             'imagen' => url("img/{$product->image}"),
             'vendedor' => (int)$product->seller_id,
             'fechaCreacion' => (string)$product->created_at,
-            'fechaActualización' => (string)$product->updated_at,
-            'fechaEliminación' => isset($product->deleted_at) ? (string)$product->deleted_at : null,
+            'fechaActualizacion' => (string)$product->updated_at,
+            'fechaEliminacion' => isset($product->deleted_at) ? (string) $product->deleted_at : null,
             'links' => [
                 [
                     'rel' => 'self',
@@ -37,7 +34,7 @@ class ProductTransformer extends TransformerAbstract
                 [
                     'rel' => 'product.categories',
                     'href' => route('products.categories.index', $product->id),
-                ],        
+                ],
                 [
                     'rel' => 'product.transactions',
                     'href' => route('products.transactions.index', $product->id),
@@ -49,7 +46,6 @@ class ProductTransformer extends TransformerAbstract
             ],
         ];
     }
-
     public static function originalAttribute($index)
     {
         $attributes = [
@@ -64,7 +60,22 @@ class ProductTransformer extends TransformerAbstract
             'fechaActualizacion' => 'updated_at',
             'fechaEliminacion' => 'deleted_at',
         ];
-
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+            'id' => 'identificador',
+            'name' => 'titulo',
+            'description' => 'detalles',
+            'quantity' => 'disponibles',
+            'status' => 'estado',
+            'image' => 'imagen',
+            'seller_id' => 'vendedor',
+            'created_at' => 'fechaCreacion',
+            'updated_at' => 'fechaActualizacion',
+            'deleted_at' => 'fechaEliminacion',
+        ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 }

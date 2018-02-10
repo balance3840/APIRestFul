@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Transformers;
-
 use App\Seller;
 use League\Fractal\TransformerAbstract;
-
 class SellerTransformer extends TransformerAbstract
 {
     /**
@@ -14,22 +11,23 @@ class SellerTransformer extends TransformerAbstract
      */
     public function transform(Seller $seller)
     {
-       return [
+        return [
             'identificador' => (int)$seller->id,
             'nombre' => (string)$seller->name,
             'correo' => (string)$seller->email,
+            'esVerificado' => (int)$seller->verified,
             'fechaCreacion' => (string)$seller->created_at,
-            'fechaActualización' => (string)$seller->updated_at,
-            'fechaEliminación' => isset($seller->deleted_at) ? (string)$seller->deleted_at : null,
+            'fechaActualizacion' => (string)$seller->updated_at,
+            'fechaEliminacion' => isset($seller->deleted_at) ? (string) $seller->deleted_at : null,
             'links' => [
                 [
                     'rel' => 'self',
                     'href' => route('sellers.show', $seller->id),
-                ],  
+                ],
                 [
                     'rel' => 'seller.buyers',
                     'href' => route('sellers.buyers.index', $seller->id),
-                ],        
+                ],
                 [
                     'rel' => 'seller.categories',
                     'href' => route('sellers.categories.index', $seller->id),
@@ -49,18 +47,30 @@ class SellerTransformer extends TransformerAbstract
             ],
         ];
     }
-
     public static function originalAttribute($index)
     {
         $attributes = [
             'identificador' => 'id',
             'nombre' => 'name',
-            'correo' => 'email',         
+            'correo' => 'email',
+            'esVerificado' => 'verified',
             'fechaCreacion' => 'created_at',
-            'fechaActualización' => 'updated_at',
-            'fechaEliminación' => 'deleted_at',
+            'fechaActualizacion' => 'updated_at',
+            'fechaEliminacion' => 'deleted_at',
         ];
-
+        return isset($attributes[$index]) ? $attributes[$index] : null;
+    }
+    public static function transformedAttribute($index)
+    {
+        $attributes = [
+            'id' => 'identificador',
+            'name' => 'nombre',
+            'email' => 'correo',
+            'verified' => 'esVerificado',
+            'created_at' => 'fechaCreacion',
+            'updated_at' => 'fechaActualizacion',
+            'deleted_at' => 'fechaEliminacion',
+        ];
         return isset($attributes[$index]) ? $attributes[$index] : null;
     }
 }
