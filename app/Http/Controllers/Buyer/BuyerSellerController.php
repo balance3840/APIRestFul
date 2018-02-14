@@ -8,7 +8,7 @@ use App\Http\Controllers\ApiController;
 
 class BuyerSellerController extends ApiController
 {
-    public function __consctruct()
+    public function __construct()
     {
         parent::__construct();
     }

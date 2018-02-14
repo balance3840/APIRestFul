@@ -8,7 +8,7 @@ use App\Http\Controllers\ApiController;
 
 class TransactionSellerController extends ApiController
 {
-    public function __consctruct()
+    public function __construct()
     {
         parent::__construct();
         $this->middleware('scope:read-general')->only(['index']);
