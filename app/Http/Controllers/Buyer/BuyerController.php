@@ -8,10 +8,11 @@ use App\Http\Controllers\ApiController;
 
 class BuyerController extends ApiController
 {
-	public function __consctruct()
+	public function __construct()
     {
         parent::__construct();
         $this->middleware('scope:read-general')->only(['show']);
+        $this->middleware('can:view,buyer')->only(['show']);
     }
     
     public function index()

@@ -19,7 +19,7 @@ class BuyerPolicy
      */
     public function view(User $user, Buyer $buyer)
     {
-        $user->id === $buyer->id;
+        return $user->id === $buyer->id;
     }
 
     /**
@@ -32,7 +32,7 @@ class BuyerPolicy
 
     public function purchase(User $user, Buyer $buyer)
     {
-        $user->id === $buyer->id;
+        return $user->id === $buyer->id;
     }
 
 }
