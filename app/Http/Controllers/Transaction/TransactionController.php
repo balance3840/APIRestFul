@@ -11,6 +11,7 @@ class TransactionController extends ApiController
     public function __consctruct()
     {
         parent::__construct();
+        $this->middleware('scope:read-general')->only(['show']);
     }
     /**
      * Display a listing of the resource.

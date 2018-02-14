@@ -11,6 +11,7 @@ class BuyerController extends ApiController
 	public function __consctruct()
     {
         parent::__construct();
+        $this->middleware('scope:read-general')->only(['show']);
     }
     
     public function index()
