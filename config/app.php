@@ -170,6 +170,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...

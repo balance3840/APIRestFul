@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use App\Traits\ApiResponser;
+use Asm89\Stack\CorsService;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Session\TokenMismatchException;
@@ -54,7 +55,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if($exception instanceof ValidationException) {
+        $response = $this->handleException($request, $exception);
+
+        app(CorsService::class)->addActualRequestHeaders($response, $request);
+
+        return $response;
+        
+    }
+
+    public function handleException($request, Exception $exception)
+    {
+                if($exception instanceof ValidationException) {
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
 
@@ -100,9 +111,7 @@ class Handler extends ExceptionHandler
         }
 
         return $this->errorResponse("Falla inesperada. Intente luego", 500);
-        
     }
-
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
