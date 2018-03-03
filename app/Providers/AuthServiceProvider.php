@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\User;
 use App\Buyer;
 use App\Seller;
+use App\Product;
 use Carbon\Carbon;
 use App\Transaction;
 use App\Policies\UserPolicy;
