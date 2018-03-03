@@ -4,11 +4,19 @@ namespace App\Policies;
 
 use App\User;
 use App\Buyer;
+use App\Traits\AdminActions;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BuyerPolicy
 {
-    use HandlesAuthorization;
+    use HandlesAuthorization, AdminActions;
+
+    public function before($user, $ability)
+    {
+        if ($user->esAdministrador()) {
+             return true;
+        }
+    }
 
     /**
      * Determine whether the user can view the buyer.
