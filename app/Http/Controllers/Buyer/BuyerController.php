@@ -17,6 +17,8 @@ class BuyerController extends ApiController
     
     public function index()
     {
+        $this->allowedAdminAction();
+
         $compradores = Buyer::has('transactions')->get();
 
         return $this->showAll($compradores);

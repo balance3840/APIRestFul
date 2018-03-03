@@ -30,6 +30,8 @@ class UserController extends ApiController
      */
     public function index()
     {
+        $this->allowedAdminAction();
+
         $usuarios = User::all();
 
         return $this->showAll($usuarios);
@@ -81,8 +83,7 @@ class UserController extends ApiController
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
-    {       
-        
+    {        
         $rules = [
           'email' => 'email|unique:users,email,'. $user->id,
           'password' => 'min:6|confirmed',
@@ -102,6 +103,7 @@ class UserController extends ApiController
         }
 
         if($request->has('admin')) {
+            $this->allowedAdminAction();
            if (!$user->esVerificado()){
                 return $this->errorResponse('Unicamente los usuarios verificados pueden cambiar su valor de administrador', 409);
            }
